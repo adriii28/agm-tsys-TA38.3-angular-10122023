@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
+import { Article } from './model/article';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  private articles: any[] = [{"id":1,"description":"papas","price":10.55},{"id":2,"description":"manzanas","price":12.1}];
+  private articles: Article[] = [
+    new Article(1, 'papas', 10.55),
+  new Article(2, 'manzanas', 12.1)];
 
-  addArticle(newArticle: any) {
+  addArticle(newArticle: Article) {
     this.articles.push(newArticle);
     console.log(this.articles);
   }
 
-  getMail() {
+  getArticles() {
     return this.articles;
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ArticleService } from '../article.service';
+import { Article } from '../model/article';
 
 @Component({
   selector: 'app-add-article',
@@ -11,9 +12,6 @@ import { ArticleService } from '../article.service';
 })
 export class AddArticleComponent {
   myForm: FormGroup;
-  id: number = 0;
-  description: string ='';
-  price : number = 0;
   articleService: ArticleService;
 
   constructor(private formBuilder: FormBuilder, private service: ArticleService) {
@@ -25,13 +23,14 @@ export class AddArticleComponent {
     this.articleService = this.service;
   }
 
-  fillForm(){
-
+  fillForm(item : Article){
+    console.log(item);
+    this.myForm.patchValue(item);
   }
 
   onSubmit() : void {
-    const articleData = this.myForm.value;  
-    this.service.addArticle(articleData);
+    const newArticle: Article = this.myForm.value as Article;
+    this.service.addArticle(newArticle);
     this.myForm.reset();
   }
 }
